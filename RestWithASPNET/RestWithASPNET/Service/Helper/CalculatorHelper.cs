@@ -1,4 +1,4 @@
-﻿namespace RestWithASPNET.Service
+﻿namespace RestWithASPNET.Service.Helper
 {
     public static class CalculatorHelper
     {
