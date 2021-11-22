@@ -1,12 +1,21 @@
 ﻿using RestWithASPNET.Model;
+using RestWithASPNET.Model.Context;
 using RestWithASPNET.Service.Implementation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RestWithASPNET.Service
 {
     public class PersonService : IPersonService
     {
+        private MySqlContext _mySqlContext;
+
+        public PersonService(MySqlContext mySqlContext)
+        {
+            _mySqlContext = mySqlContext;
+        }
+
         public Person Create(Person person)
         {
             return PersonMock();
@@ -19,14 +28,7 @@ namespace RestWithASPNET.Service
 
         public List<Person> FindAll()
         {
-            var result = new List<Person>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                result.Add(PersonMock());
-            }
-
-            return result;
+            return _mySqlContext.Persons.ToList();
         }
 
         public Person FindById(long id)
